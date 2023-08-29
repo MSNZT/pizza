@@ -9,7 +9,7 @@ export const store = configureStore({
 	reducer: {
 		filter,
 		products,
-		cart
+		cart,
 	}
 })
 

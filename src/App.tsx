@@ -21,6 +21,8 @@ const App: React.FC = () => {
 							 element={<FullProduct/>}/>
 				<Route path='payment'
 							 element={<PaymentBlock/>}/>
+				{/*<Route path='test'*/}
+				{/*			 element={<TestBlock/>}/>*/}
 			</Route>
 		</Routes>
 	);

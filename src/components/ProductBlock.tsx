@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {nanoid} from "nanoid";
 import {Link} from "react-router-dom";
+import {Sizes, Types} from "../redux/Products/types";
 import {addItem} from "../redux/Cart/slice";
+import {calcProductPrice} from "../utils/calcProductPrice";
 
-export const typesName = ['тонкое', 'традиционное'];
+export const typesName: string[] = ['тонкое', 'традиционное'];
 
-type ProductBlockProps = {
+interface ProductBlockProps {
 	title: string,
 	imageUrl: string,
 	price: number,
-	types: number[],
-	sizes: number[],
+	types: Types[],
+	sizes: Sizes[],
 	id: string
 }
 
@@ -24,17 +25,23 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
 																														id
 																													}) => {
 	const dispatch = useDispatch();
-	const generateId = nanoid(8);
+	// const generateId = nanoid(8);
 	const [typeIndex, setTypeIndex] = useState(0);
 	const [sizeIndex, setSizeIndex] = useState(0);
+	const [priceItem, setPriceItem] = useState(0);
+	const generateId = id + types[typeIndex].price + sizes[sizeIndex].price;
+	
+	useEffect(() => {
+		setPriceItem(calcProductPrice(types[typeIndex], sizes[sizeIndex], price));
+	}, [typeIndex, sizeIndex])
 	const onClickAdd = () => {
 		const item = {
 			id: generateId,
 			title,
 			imageUrl,
-			price,
+			price: priceItem,
 			type: typesName[typeIndex],
-			size: sizes[sizeIndex],
+			size: sizes[sizeIndex].sizeItem,
 			count: 0
 		}
 		dispatch(addItem(item))
@@ -52,27 +59,29 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
 			</Link>
 			<div className="pizza-block__selector">
 				<ul>
-					{types.map((type, i: number) => <li
+					{types.map((obj, i: number) => <li
 						key={i}
 						className={typeIndex === i ? 'active' : 'null'}
 						onClick={() => setTypeIndex(i)}
 					>
-						{typesName[type]}
+						{typesName[obj.typeItem]}
 					</li>)}
 				</ul>
 				<ul>
-					{sizes.map((size, i: number) => <li
+					{sizes.map((obj, i: number) => <li
 						key={i}
 						className={sizeIndex === i ? 'active' : ''}
 						onClick={() => setSizeIndex(i)}
 					>
-						{size} см.
+						{obj.sizeItem} см.
 					</li>)}
 				</ul>
 			</div>
 			<div className="pizza-block__bottom">
-				<div className="pizza-block__price">от {price} ₽</div>
-				<button className="button button--outline button--add" onClick={onClickAdd}>
+				<div className="pizza-block__price">от {priceItem} ₽</div>
+				<button className="button button--outline button--add"
+								onClick={onClickAdd}
+				>
 					<svg
 						width="12"
 						height="12"

@@ -5,14 +5,24 @@ export type SearchPizzaParams = {
 	currentPage: number;
 };
 
+export type Types = {
+	typeItem: number,
+	price: number
+}
+
+export type Sizes = {
+	sizeItem: number,
+	price: number
+}
+
 export type ProductType = {
 	category: number,
 	id: string,
 	imageUrl: string,
 	price: number,
 	rating: number,
-	sizes: [],
-	types: [],
+	sizes: Types[],
+	types: Sizes[],
 	title: string
 }
 
