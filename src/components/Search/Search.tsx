@@ -12,7 +12,7 @@ export const Search: React.FC = () => {
 		e.preventDefault();
 		if (tempSearchValue) {
 			dispatch(onResetFilters());
-			dispatch(setSearchValue(tempSearchValue));
+			dispatch(setSearchValue(tempSearchValue.trim()));
 			inputRef.current?.blur();
 		}
 	}
