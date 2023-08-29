@@ -471,9 +471,17 @@ body {
     width: 560px;
     text-align: center;
 
+    @media (max-width: 700px) {
+      width: auto;
+    }
+
     h2 {
       font-size: 32px;
       margin-bottom: 10px;
+
+      @media (max-width: 450px) {
+        font-size: 25px;
+      }
     }
 
     p {
@@ -481,6 +489,10 @@ body {
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
+
+      @media (max-width: 450px) {
+        font-size: 16px;
+      }
     }
 
     span {
@@ -492,6 +504,10 @@ body {
       display: block;
       width: 300px;
       margin: 45px auto 60px;
+
+      @media (max-width: 450px) {
+        max-width: 100%;
+      }
     }
 
     .button--black {
