@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
 						</div>
 					</div>
 				</Link>
-				{location.pathname !== '/cart' || '/payment' && <Search/>}
+				{location.pathname !== '/cart' && location.pathname !== '/payment' && <Search/>}
 				<div className="header__cart">
 					<Link to='/cart' className="button button--cart">
 						<span>{totalPrice} ₽</span>
