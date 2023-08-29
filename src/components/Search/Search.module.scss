@@ -1,0 +1,57 @@
+.root {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  width: 300px;
+  padding: 12px 70px 12px 12px;
+
+  @media(max-width: 500px) {
+    max-width: 250px;
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background: #f3f3f3;
+      border-radius: 5px;
+    }
+  }
+}
+
+.reset {
+  right: 40px;
+
+  path {
+    stroke: #afafaf;
+  }
+}
+
+.search {
+  right: 10px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  path {
+    opacity: 0.4;
+    stroke: #afafaf;
+  }
+}
+
+.input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
